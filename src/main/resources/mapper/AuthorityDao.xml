@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.backend.dao.AuthorityDao">
+
+    <resultMap type='com.backend.domain.Authority' id='authorityResult'>
+        <result property='username' column='username' />
+        <result property='authority' column='authority' />
+    </resultMap>
+
+    <select id="getAuthorities" resultType="com.backend.domain.Authority"
+        resultMap="authorityResult">
+        <![CDATA[
+        SELECT authority
+        FROM authorities 
+        WHERE username= #{username}
+        ]]>
+    </select>
+
+    <insert id="create" parameterType="com.backend.domain.Authority"
+        useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        <![CDATA[
+        INSERT INTO
+        authorities (username,authority)
+        VALUES (#{domain.username},#{domain.authority})
+        ]]>
+    </insert>
+</mapper>
